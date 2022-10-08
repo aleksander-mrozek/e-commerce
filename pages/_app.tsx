@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <div>
       <Component {...pageProps} />
     </div>
-  )
-};
+  );
+}
 
 export default MyApp;
