@@ -4,12 +4,10 @@ import { Product } from "../components/Product";
 import { Footer } from "../components/Footer";
 
 const DATA = {
-  description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-  lobortis est at leo sodales, eu semper augue consectetur. Nulla id est
-  et sem faucibus ullamcorper et in urna. Morbi neque dolor, gravida
-  quis metus quis, convallis lacinia purus.`,
-  thumbnailUrl: `https://picsum.photos/id/104/384/216`,
-  thumbnailAlt: `dreamcatcher`,
+  title: "Dreamcatcher",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  thumbnailUrl: "https://picsum.photos/id/104/384/216",
+  thumbnailAlt: "dreamcatcher",
   rating: 4.5,
 };
 
