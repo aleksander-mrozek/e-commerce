@@ -25,6 +25,7 @@ const ProductsCSRPage = () => {
           <li key={product.id} className="shadow-xl border-2">
             <ProductDetails
               data={{
+                id: product.id,
                 title: product.title,
                 description: product.description,
                 thumbnailUrl: product.image,
