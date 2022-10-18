@@ -1,4 +1,5 @@
-import { InferGetStaticPropsType } from "next";
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import { InferGetStaticPathsType } from "../../types";
 import Link from "next/link";
 import { ProductDetails } from "../../components/Product";
 
@@ -21,6 +22,7 @@ const ProductIdPage = ({
           thumbnailAlt: data.title,
           description: data.description,
           rating: data.rating.rate,
+          longDescription: data.longDescription,
         }}
       />
     </div>
@@ -30,7 +32,7 @@ const ProductIdPage = ({
 export default ProductIdPage;
 
 export const getStaticPaths = async () => {
-  const res = await fetch("https://fakestoreapi.com/products/");
+  const res = await fetch("https://naszsklep-api.vercel.app/api/products/");
   const data: StoreApiResponse[] = await res.json();
   return {
     paths: data.map((product) => {
@@ -46,7 +48,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({
   params,
-}: InferGetStaticPaths<typeof getStaticPaths>) => {
+}: GetStaticPropsContext<InferGetStaticPathsType<typeof getStaticPaths>>) => {
   if (!params?.productId) {
     return {
       props: {},
@@ -54,7 +56,7 @@ export const getStaticProps = async ({
     };
   }
   const res = await fetch(
-    `https://fakestoreapi.com/products/${params.productId}`
+    `https://naszsklep-api.vercel.app/api/products/${params.productId}`
   );
   const data: StoreApiResponse | null = await res.json();
 
@@ -72,14 +74,9 @@ export interface StoreApiResponse {
   description: string;
   category: string;
   image: string;
+  longDescription: string;
   rating: {
     rate: number;
     count: number;
   };
 }
-
-export type InferGetStaticPaths<T> = T extends () => Promise<{
-  paths: Array<{ params: infer R }>;
-}>
-  ? { params?: R }
-  : never;
