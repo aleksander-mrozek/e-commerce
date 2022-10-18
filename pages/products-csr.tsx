@@ -31,6 +31,7 @@ const ProductsCSRPage = () => {
                 thumbnailUrl: product.image,
                 thumbnailAlt: product.title,
                 rating: product.rating.rate,
+                longDescription: product.longDescription,
               }}
             />
           </li>
@@ -49,6 +50,7 @@ export interface StoreApiResponse {
   description: string;
   category: string;
   image: string;
+  longDescription: string;
   rating: {
     rate: number;
     count: number;
