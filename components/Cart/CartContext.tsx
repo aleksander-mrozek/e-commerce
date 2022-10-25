@@ -1,12 +1,14 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 interface CartItem {
-  price: number;
-  title: string;
+  readonly price: number;
+  readonly title: string;
+  readonly count: number;
 }
 
 interface CartState {
-  items: CartItem[];
+  readonly items: readonly CartItem[];
+  readonly addItemToCart: (item: CartItem) => void;
 }
 
 export const CartStateContext = createContext<CartState | null>(null);
@@ -16,16 +18,31 @@ export const CartStateContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      price: 21.34,
-      title: "T-shirt",
-    },
-  ]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   return (
     <CartStateContext.Provider
       value={{
         items: cartItems,
+        addItemToCart: (item) => {
+          setCartItems((prevState) => {
+            const existingItem = prevState.find(
+              (existingItem) => existingItem.title === item.title
+            );
+            if (!existingItem) {
+              return [...prevState, item];
+            }
+
+            return prevState.map((existingItem) => {
+              if (existingItem.title === item.title) {
+                return {
+                  ...existingItem,
+                  count: existingItem.count + 1,
+                };
+              }
+              return existingItem;
+            });
+          });
+        },
       }}
     >
       {children}

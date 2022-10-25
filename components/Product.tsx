@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Rating } from "./Rating";
 import { WebsiteReactMarkdown } from "./WebsiteReactMarkdown";
 import { MarkdownResult } from "../types";
+import { useCartState } from "./Cart/CartContext";
 
 interface ProductDetails {
   id: number;
@@ -71,6 +72,7 @@ interface ProductListItemProps {
 }
 
 export const ProductListItem = ({ data }: ProductListItemProps) => {
+  const cartState = useCartState();
   return (
     <>
       <div className="bg-white p-4">
@@ -83,11 +85,27 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
           objectFit="contain"
         />
       </div>
-      <Link href={`/products/${data.id}`}>
-        <a>
-          <h2 className="p-4 text-3xl font-bold">{data.title}</h2>
-        </a>
-      </Link>
+      <div className="p-4">
+        <Link href={`/products/${data.id}`}>
+          <a>
+            <h2 className="pb-4 text-3xl font-bold">{data.title}</h2>
+          </a>
+        </Link>
+        <button
+          onClick={() => {
+            cartState.addItemToCart({
+              price: 99.99,
+              title: data.title,
+              count: 1,
+            });
+          }}
+          className="inline-block rounded bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] focus:outline-none focus:ring active:text-opacity-75"
+        >
+          <span className="block rounded-sm bg-white px-8 py-3 text-sm font-medium hover:text-white hover:bg-transparent active:text-gray-500">
+            Add to cart
+          </span>
+        </button>
+      </div>
     </>
   );
 };
