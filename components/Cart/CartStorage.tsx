@@ -1,3 +1,5 @@
+import { CartItem } from "./CartContext";
+
 export const getCartItemsFromStorage = () => {
   const itemsFromLocalStorage = localStorage.getItem("E-commerce-key");
   if (!itemsFromLocalStorage) {

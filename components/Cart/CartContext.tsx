@@ -8,7 +8,7 @@ import {
 
 import { getCartItemsFromStorage, setCartItemsInStorage } from "./CartStorage";
 
-interface CartItem {
+export interface CartItem {
   readonly id: number;
   readonly price: number;
   readonly title: string;
@@ -28,22 +28,25 @@ export const CartStateContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[] | undefined>(undefined);
 
   useEffect(() => {
     setCartItems(getCartItemsFromStorage());
   }, []);
 
   useEffect(() => {
+    if (cartItems === undefined) {
+      return;
+    }
     setCartItemsInStorage(cartItems);
   }, [cartItems]);
 
   return (
     <CartStateContext.Provider
       value={{
-        items: cartItems,
+        items: cartItems || [],
         addItemToCart: (item) => {
-          setCartItems((prevState) => {
+          setCartItems((prevState = []) => {
             const existingItem = prevState.find((el) => el.id === item.id);
             if (!existingItem) {
               return [...prevState, item];
@@ -61,11 +64,8 @@ export const CartStateContextProvider = ({
           });
         },
         removeItemFromCart: (id) => {
-          setCartItems((prevState) => {
-            const existingItem = prevState.find((el) => {
-              el.id === id;
-            });
-            console.log(existingItem);
+          setCartItems((prevState = []) => {
+            const existingItem = prevState.find((el) => el.id === id);
             if (existingItem && existingItem.count <= 1) {
               return prevState.filter((el) => el.id !== id);
             }
