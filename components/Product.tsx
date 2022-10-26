@@ -94,6 +94,7 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
         <button
           onClick={() => {
             cartState.addItemToCart({
+              id: data.id,
               price: 99.99,
               title: data.title,
               count: 1,
