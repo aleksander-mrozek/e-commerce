@@ -1,5 +1,7 @@
 import { InferGetStaticPropsType } from "next";
+
 import { ProductListItem } from "../components/Product";
+import { StoreApiResponse } from "../interfaces";
 
 const ProductsPage = ({
   data,
@@ -36,16 +38,3 @@ export const getStaticProps = async () => {
     },
   };
 };
-
-export interface StoreApiResponse {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}

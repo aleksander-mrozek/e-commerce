@@ -1,8 +1,10 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
-import { InferGetStaticPathsType } from "../../types";
 import Link from "next/link";
+
 import { ProductDetails } from "../../components/Product";
+import { StoreApiResponse } from "../../interfaces";
+import { InferGetStaticPathsType } from "../../types";
 
 const ProductIdPage = ({
   data,
@@ -12,7 +14,7 @@ const ProductIdPage = ({
   }
   return (
     <div>
-      <Link href="/products">
+      <Link href="/products-ssg">
         <a>Return to products</a>
       </Link>
       <ProductDetails
@@ -77,17 +79,3 @@ export const getStaticProps = async ({
     },
   };
 };
-
-export interface StoreApiResponse {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  longDescription: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
