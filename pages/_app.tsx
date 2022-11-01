@@ -6,19 +6,23 @@ import { Layout } from "../components/Layout";
 import "../styles/globals.css";
 import SEO from "../next-seo.config";
 import { CartStateContextProvider } from "../components/Cart/CartContext";
+import { ApolloProvider } from "@apollo/client";
+import { apolloClient } from "../GraphQL/apolloClient";
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CartStateContextProvider>
-      <Layout>
-        <DefaultSeo {...SEO} />
-        <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
-        </QueryClientProvider>
-      </Layout>
-    </CartStateContextProvider>
+    <ApolloProvider client={apolloClient}>
+      <CartStateContextProvider>
+        <Layout>
+          <DefaultSeo {...SEO} />
+          <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+          </QueryClientProvider>
+        </Layout>
+      </CartStateContextProvider>
+    </ApolloProvider>
   );
 }
 
