@@ -7,7 +7,7 @@ import "../styles/globals.css";
 import SEO from "../next-seo.config";
 import { CartStateContextProvider } from "../components/Cart/CartContext";
 import { ApolloProvider } from "@apollo/client";
-import { apolloClient } from "../GraphQL/apolloClient";
+import { apolloClient } from "../graphql/apolloClient";
 
 const queryClient = new QueryClient();
 

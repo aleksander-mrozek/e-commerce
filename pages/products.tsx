@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { InferGetStaticPropsType } from "next";
 
 import { ProductListItem } from "../components/Product";
-import { apolloClient } from "../GraphQL/apolloClient";
+import { apolloClient } from "../graphql/apolloClient";
 
 const ProductsPage = ({
   data,
@@ -11,10 +11,10 @@ const ProductsPage = ({
     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {data.products.map((product) => {
         return (
-          <li key={product.id} className="shadow-xl border-2">
+          <li key={product.slug} className="shadow-xl border-2">
             <ProductListItem
               data={{
-                id: product.id,
+                id: product.slug,
                 title: product.name,
                 thumbnailUrl: product.images[0].url,
                 thumbnailAlt: product.name,
@@ -34,7 +34,6 @@ export const getStaticProps = async () => {
     query: gql`
       query GetProductsList {
         products {
-          id
           slug
           name
           price
@@ -58,7 +57,6 @@ export interface GetProductsListResponse {
 }
 
 export interface Product {
-  id: string;
   slug: string;
   name: string;
   price: number;
