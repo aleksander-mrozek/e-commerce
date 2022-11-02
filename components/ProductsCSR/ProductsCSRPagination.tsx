@@ -55,7 +55,7 @@ export const ProductsCSRPagination = () => {
             Showing{" "}
             {page === 1
               ? page.toString()
-              : ((page - 1) * PRODUCTS_PER_PAGE).toString()}{" "}
+              : ((page - 1) * PRODUCTS_PER_PAGE + 1).toString()}{" "}
             to {(PRODUCTS_PER_PAGE * page).toString()} of{" "}
             {(PRODUCTS_PER_PAGE * NUMBER_OF_PAGES).toString()} results
           </p>

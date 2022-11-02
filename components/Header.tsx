@@ -25,24 +25,23 @@ export const Header = () => {
             About
           </a>
         </Link>
-        <Link href="/products-ssg">
+        <Link href="/products">
           <a
             className={
-              mr +
-              (router.pathname === "/products-ssg" ? "text-indigo-300" : "")
+              mr + (router.pathname === "/products" ? "text-indigo-300" : "")
             }
           >
-            Products - SSG
+            Products
           </a>
         </Link>
-        <Link href="/products-csr">
+        <Link href="/products/csr">
           <a
             className={
               mr +
-              (router.pathname === "/products-csr" ? "text-indigo-300" : "")
+              (router.pathname === "/products/csr" ? "text-indigo-300" : "")
             }
           >
-            Products - CSR
+            CSR
           </a>
         </Link>
       </nav>

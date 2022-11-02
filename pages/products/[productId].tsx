@@ -14,7 +14,7 @@ const ProductIdPage = ({
   }
   return (
     <div>
-      <Link href="/products-ssg">
+      <Link href="/products">
         <a>Return to products</a>
       </Link>
       <ProductDetails

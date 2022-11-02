@@ -1,4 +1,4 @@
-import { ProductListItem } from "../Product";
+import { ProductCSRListItem } from "./ProductCSR";
 import { useProductsForPage } from "./useProductsCSR";
 
 interface ProductsCSRProps {
@@ -13,9 +13,8 @@ export const ProductsCSRList = ({ page }: ProductsCSRProps) => {
       {products?.map((product) => {
         return (
           <li key={product.id} className="shadow-xl border-2">
-            <ProductListItem
+            <ProductCSRListItem
               data={{
-                id: product.id,
                 title: product.title,
                 thumbnailUrl: product.image,
                 thumbnailAlt: product.title,

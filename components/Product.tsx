@@ -8,7 +8,7 @@ import { MarkdownResult } from "../types";
 import { useCartState } from "./Cart/CartContext";
 
 interface ProductDetails {
-  id: number;
+  id: string;
   title: string;
   description: string;
   thumbnailUrl: string;
