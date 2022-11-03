@@ -1,9 +1,15 @@
-import { gql } from "@apollo/client";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 
 import { apolloClient } from "../../graphql/apolloClient";
+import {
+  GetProductDetailsBySlugDocument,
+  GetProductDetailsBySlugQuery,
+  GetProductDetailsBySlugQueryVariables,
+  GetProductsSlugsDocument,
+  GetProductsSlugsQuery,
+} from "../../generated/graphql";
 import { InferGetStaticPathsType } from "../../types";
 import { ProductDetails } from "../../components/Product";
 
@@ -36,20 +42,8 @@ const ProductIdPage = ({
 export default ProductIdPage;
 
 export const getStaticPaths = async () => {
-  interface GetProductsSlugsResponse {
-    products: Product[];
-  }
-  interface Product {
-    slug: string;
-  }
-  const { data } = await apolloClient.query<GetProductsSlugsResponse>({
-    query: gql`
-      query GetProductsSlugs {
-        products {
-          slug
-        }
-      }
-    `,
+  const { data } = await apolloClient.query<GetProductsSlugsQuery>({
+    query: GetProductsSlugsDocument,
   });
   return {
     paths: data.products.map((product) => {
@@ -72,43 +66,16 @@ export const getStaticProps = async ({
       notFound: true,
     };
   }
-  interface GetProductDetailsBySlugResponse {
-    product: Product;
-  }
-
-  interface Product {
-    slug: string;
-    name: string;
-    price: number;
-    description: string;
-    images: Image[];
-  }
-
-  interface Image {
-    url: string;
-  }
   const { data } = await apolloClient.query<
-    GetProductDetailsBySlugResponse,
-    { slug: string }
+    GetProductDetailsBySlugQuery,
+    GetProductDetailsBySlugQueryVariables
   >({
     variables: {
       slug: params.productId,
     },
-    query: gql`
-      query GetProductDetailsBySlug($slug: String) {
-        product(where: { slug: $slug }) {
-          slug
-          name
-          price
-          description
-          images {
-            url
-          }
-        }
-      }
-    `,
+    query: GetProductDetailsBySlugDocument,
   });
-  if (!data) {
+  if (!data.product) {
     return {
       props: {},
       notFound: true,
