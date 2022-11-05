@@ -1,5 +1,5 @@
+import { useProductsForPage } from "./useCSRProducts";
 import { ProductCSRListItem } from "./ProductCSR";
-import { useProductsForPage } from "./useProductsCSR";
 
 interface ProductsCSRProps {
   page: number;

@@ -1,8 +1,6 @@
+import { useCSRPagination } from "../../components/ProductsCSR/useCSRPagination";
 import { ProductsCSRList } from "../../components/ProductsCSR/ProductsCSRList";
-import {
-  ProductsCSRPagination,
-  useCSRPagination,
-} from "../../components/ProductsCSR/ProductsCSRPagination";
+import { ProductsCSRPagination } from "../../components/ProductsCSR/ProductsCSRPagination";
 
 const ProductsCSRPage = () => {
   const { page } = useCSRPagination();
