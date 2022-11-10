@@ -6,6 +6,7 @@ const nextConfig = {
       "naszsklep-api.vercel.app",
       "picsum.photos",
       "media.graphassets.com",
+      "images.unsplash.com",
     ],
     formats: ["image/avif", "image/webp"],
   },

@@ -34,7 +34,7 @@ export const Header = () => {
             Products
           </a>
         </Link>
-        <Link href="/products/csr">
+        <Link href="/products/csr?page=1">
           <a
             className={
               mr +
