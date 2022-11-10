@@ -2,7 +2,7 @@ import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 
-import { apolloClient } from "../../graphql/apolloClient";
+import { apolloClient } from "../../GraphQL/apolloClient";
 import {
   GetProductDetailsBySlugDocument,
   GetProductDetailsBySlugQuery,

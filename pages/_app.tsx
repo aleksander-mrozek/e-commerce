@@ -1,13 +1,13 @@
 import type { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ApolloProvider } from "@apollo/client";
 
 import { Layout } from "../components/Layout";
 import "../styles/globals.css";
 import SEO from "../next-seo.config";
 import { CartStateContextProvider } from "../components/Cart/CartContext";
-import { ApolloProvider } from "@apollo/client";
-import { apolloClient } from "../graphql/apolloClient";
+import { apolloClient } from "../GraphQL/apolloClient";
 
 const queryClient = new QueryClient();
 
