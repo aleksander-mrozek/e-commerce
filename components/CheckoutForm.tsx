@@ -1,11 +1,28 @@
 import Image from "next/image";
-import { FormEventHandler } from "react";
+import { useForm } from "react-hook-form";
+
+interface CheckoutFormData {
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  phoneNumber: string;
+  cardNumber: string;
+  cardExpirationDate: string;
+  cardCVC: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
 
 export const CheckoutForm = () => {
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    console.log(e);
-  };
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CheckoutFormData>();
+  const onSubmit = handleSubmit((data) => console.log(data));
   return (
     <section>
       <h1 className="sr-only">Checkout</h1>
@@ -15,15 +32,29 @@ export const CheckoutForm = () => {
           <div className="bg-gray-50 py-12 md:py-24">
             <div className="mx-auto max-w-lg px-4 lg:px-8">
               <div className="flex items-center">
-                <span className="h-10 w-10 rounded-full bg-blue-900"></span>
-
-                <h2 className="ml-4 font-medium">BambooYou</h2>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <h2 className="ml-4 font-medium">Username</h2>
               </div>
 
               <div className="mt-8">
-                <p className="text-2xl font-medium tracking-tight">$99.99</p>
+                <p className="text-2xl font-medium tracking-tight mb-12">
+                  Total: $99.99
+                </p>
                 <p className="mt-1 text-sm text-gray-500">
-                  For the purchase of
+                  For the purchase of:
                 </p>
               </div>
 
@@ -33,25 +64,25 @@ export const CheckoutForm = () => {
                     <li className="flex items-center justify-between py-4">
                       <div className="flex items-start">
                         <Image
-                          alt="Trainer"
-                          src="https://images.unsplash.com/photo-1565299999261-28ba859019bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+                          alt="Scarf"
+                          src="https://picsum.photos/id/758/150/100"
                           className="h-16 w-16 flex-shrink-0 rounded-lg object-cover"
-                          width={16}
-                          height={9}
+                          width={150}
+                          height={100}
                         />
 
                         <div className="ml-4">
-                          <p className="text-sm">Vibrant Trainers</p>
+                          <p className="text-sm">Scarf</p>
 
                           <dl className="mt-1 space-y-1 text-xs text-gray-500">
                             <div>
-                              <dt className="inline">Color:</dt>
-                              <dd className="inline">Blue</dd>
+                              <dt className="inline">Color: </dt>
+                              <dd className="inline">Mixed</dd>
                             </div>
 
                             <div>
-                              <dt className="inline">Size:</dt>
-                              <dd className="inline">UK 10</dd>
+                              <dt className="inline">Material: </dt>
+                              <dd className="inline">100% wool</dd>
                             </div>
                           </dl>
                         </div>
@@ -60,7 +91,7 @@ export const CheckoutForm = () => {
                       <div>
                         <p className="text-sm">
                           $49.99
-                          <small className="text-gray-500">x1</small>
+                          <small className="text-gray-500 pl-2">x1</small>
                         </p>
                       </div>
                     </li>
@@ -68,20 +99,20 @@ export const CheckoutForm = () => {
                     <li className="flex items-center justify-between py-4">
                       <div className="flex items-start">
                         <Image
-                          alt="Lettuce"
-                          src="https://images.unsplash.com/photo-1640958904159-51ae08bd3412?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80"
+                          alt="Shoes"
+                          src="https://picsum.photos/id/21/150/100"
                           className="h-16 w-16 flex-shrink-0 rounded-lg object-cover"
-                          width={16}
-                          height={9}
+                          width={150}
+                          height={100}
                         />
 
                         <div className="ml-4">
-                          <p className="text-sm">Lettuce</p>
+                          <p className="text-sm">Shoes</p>
 
                           <dl className="mt-1 space-y-1 text-xs text-gray-500">
                             <div>
-                              <dt className="inline">Size:</dt>
-                              <dd className="inline">Big</dd>
+                              <dt className="inline">Size: </dt>
+                              <dd className="inline">37</dd>
                             </div>
                           </dl>
                         </div>
@@ -89,8 +120,8 @@ export const CheckoutForm = () => {
 
                       <div>
                         <p className="text-sm">
-                          $25
-                          <small className="text-gray-500">x2</small>
+                          $79
+                          <small className="text-gray-500 pl-2">x1</small>
                         </p>
                       </div>
                     </li>
@@ -102,7 +133,7 @@ export const CheckoutForm = () => {
 
           <div className="bg-white py-12 md:py-24">
             <div className="mx-auto max-w-lg px-4 lg:px-8">
-              <form onSubmit={handleSubmit} className="grid grid-cols-6 gap-4">
+              <form onSubmit={onSubmit} className="grid grid-cols-6 gap-4">
                 <div className="col-span-3">
                   <label
                     className="mb-1 block text-sm text-gray-600"
@@ -115,6 +146,7 @@ export const CheckoutForm = () => {
                     className="w-full rounded-lg border-gray-200 p-2.5 text-sm shadow-sm"
                     type="text"
                     id="first_name"
+                    {...register("firstName")}
                   />
                 </div>
 
@@ -130,6 +162,7 @@ export const CheckoutForm = () => {
                     className="w-full rounded-lg border-gray-200 p-2.5 text-sm shadow-sm"
                     type="text"
                     id="last_name"
+                    {...register("lastName")}
                   />
                 </div>
 
@@ -145,6 +178,7 @@ export const CheckoutForm = () => {
                     className="w-full rounded-lg border-gray-200 p-2.5 text-sm shadow-sm"
                     type="email"
                     id="email"
+                    {...register("emailAddress")}
                   />
                 </div>
 
@@ -160,6 +194,7 @@ export const CheckoutForm = () => {
                     className="w-full rounded-lg border-gray-200 p-2.5 text-sm shadow-sm"
                     type="tel"
                     id="phone"
+                    {...register("phoneNumber")}
                   />
                 </div>
 
@@ -177,9 +212,9 @@ export const CheckoutForm = () => {
                       <input
                         className="relative w-full rounded-t-lg border-gray-200 p-2.5 text-sm placeholder-gray-400 focus:z-10"
                         type="text"
-                        name="card-number"
                         id="card-number"
                         placeholder="Card number"
+                        {...register("cardNumber")}
                       />
                     </div>
 
@@ -195,9 +230,9 @@ export const CheckoutForm = () => {
                         <input
                           className="relative w-full rounded-bl-lg border-gray-200 p-2.5 text-sm placeholder-gray-400 focus:z-10"
                           type="text"
-                          name="card-expiration-date"
                           id="card-expiration-date"
                           placeholder="MM / YY"
+                          {...register("cardExpirationDate")}
                         />
                       </div>
 
@@ -209,9 +244,9 @@ export const CheckoutForm = () => {
                         <input
                           className="relative w-full rounded-br-lg border-gray-200 p-2.5 text-sm placeholder-gray-400 focus:z-10"
                           type="text"
-                          name="card-cvc"
                           id="card-cvc"
                           placeholder="CVC"
+                          {...register("cardCVC")}
                         />
                       </div>
                     </div>
@@ -220,10 +255,52 @@ export const CheckoutForm = () => {
 
                 <fieldset className="col-span-6">
                   <legend className="mb-1 block text-sm text-gray-600">
-                    Billing Address
+                    Billing details
                   </legend>
 
                   <div className="-space-y-px rounded-lg bg-white shadow-sm">
+                    <div>
+                      <label className="sr-only" htmlFor="address">
+                        Address
+                      </label>
+
+                      <input
+                        className="relative w-full rounded-b-lg border-gray-200 p-2.5 text-sm placeholder-gray-400 focus:z-10"
+                        type="text"
+                        id="address"
+                        autoComplete="address"
+                        placeholder="Address"
+                        {...register("address")}
+                      />
+                    </div>
+                    <div>
+                      <label className="sr-only" htmlFor="city">
+                        City
+                      </label>
+
+                      <input
+                        className="relative w-full rounded-b-lg border-gray-200 p-2.5 text-sm placeholder-gray-400 focus:z-10"
+                        type="text"
+                        id="city"
+                        autoComplete="city"
+                        placeholder="City"
+                        {...register("city")}
+                      />
+                    </div>
+                    <div>
+                      <label className="sr-only" htmlFor="postal-code">
+                        Postal Code
+                      </label>
+
+                      <input
+                        className="relative w-full rounded-b-lg border-gray-200 p-2.5 text-sm placeholder-gray-400 focus:z-10"
+                        type="text"
+                        id="postal-code"
+                        autoComplete="postal-code"
+                        placeholder="Postal Code"
+                        {...register("postalCode")}
+                      />
+                    </div>
                     <div>
                       <label className="sr-only" htmlFor="country">
                         Country
@@ -232,31 +309,13 @@ export const CheckoutForm = () => {
                       <select
                         className="relative w-full rounded-t-lg border-gray-200 p-2.5 text-sm focus:z-10"
                         id="country"
-                        name="country"
                         autoComplete="country-name"
+                        {...register("country")}
                       >
-                        <option>England</option>
-                        <option>Wales</option>
-                        <option>Scotland</option>
-                        <option>France</option>
-                        <option>Belgium</option>
-                        <option>Japan</option>
+                        <option>Poland</option>
+                        <option>USA</option>
+                        <option>Germany</option>
                       </select>
-                    </div>
-
-                    <div>
-                      <label className="sr-only" htmlFor="postal-code">
-                        ZIP/Post Code
-                      </label>
-
-                      <input
-                        className="relative w-full rounded-b-lg border-gray-200 p-2.5 text-sm placeholder-gray-400 focus:z-10"
-                        type="text"
-                        name="postal-code"
-                        id="postal-code"
-                        autoComplete="postal-code"
-                        placeholder="ZIP/Post Code"
-                      />
                     </div>
                   </div>
                 </fieldset>
@@ -266,7 +325,7 @@ export const CheckoutForm = () => {
                     className="block w-full rounded-lg bg-black p-2.5 text-sm text-white"
                     type="submit"
                   >
-                    Pay Now
+                    Proceed with transaction
                   </button>
                 </div>
               </form>
