@@ -1,19 +1,25 @@
 import Image from "next/image";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-interface CheckoutFormData {
-  firstName: string;
-  lastName: string;
-  emailAddress: string;
-  phoneNumber: string;
-  cardNumber: string;
-  cardExpirationDate: string;
-  cardCVC: string;
-  address: string;
-  city: string;
-  postalCode: string;
-  country: string;
-}
+const checkoutFormSchema = yup
+  .object({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    emailAddress: yup.string().email().required(),
+    phoneNumber: yup.string().required(),
+    cardNumber: yup.string().required(),
+    cardExpirationDate: yup.string().required(),
+    cardCVC: yup.string().required(),
+    address: yup.string().required(),
+    city: yup.string().required(),
+    postalCode: yup.string().required(),
+    country: yup.string().required(),
+  })
+  .required();
+
+type CheckoutFormData = yup.InferType<typeof checkoutFormSchema>;
 
 export const CheckoutForm = () => {
   const {
@@ -21,7 +27,9 @@ export const CheckoutForm = () => {
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<CheckoutFormData>();
+  } = useForm<CheckoutFormData>({
+    resolver: yupResolver(checkoutFormSchema),
+  });
   const onSubmit = handleSubmit((data) => console.log(data));
   return (
     <section>
