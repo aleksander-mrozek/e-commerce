@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-import { PRODUCTS_PER_PAGE } from "../../APIs/getProducts";
+import { NUMBER_OF_PRODUCTS, PRODUCTS_PER_PAGE } from "../../APIs/getProducts";
 import { PaginationLayout } from "../Pagination/PaginationLayout";
 import { useCSRPagination } from "./useCSRPagination";
 
 export const ProductsCSRPagination = () => {
   const { page, getPageHref } = useCSRPagination();
 
-  const NUMBER_OF_PAGES = 10;
+  const NUMBER_OF_PAGES = Math.ceil(NUMBER_OF_PRODUCTS / PRODUCTS_PER_PAGE);
   const prevPage = page - 1;
   const nextPage = page + 1;
   const prevPageHref = page > 1 ? getPageHref(prevPage) : getPageHref(1);
@@ -30,8 +30,11 @@ export const ProductsCSRPagination = () => {
             {page === 1
               ? page.toString()
               : ((page - 1) * PRODUCTS_PER_PAGE + 1).toString()}{" "}
-            to {(PRODUCTS_PER_PAGE * page).toString()} of{" "}
-            {(PRODUCTS_PER_PAGE * NUMBER_OF_PAGES).toString()} results
+            to{" "}
+            {page === NUMBER_OF_PAGES
+              ? NUMBER_OF_PRODUCTS
+              : (PRODUCTS_PER_PAGE * page).toString()}{" "}
+            of {NUMBER_OF_PRODUCTS.toString()} results
           </p>
         </div>
         <div>

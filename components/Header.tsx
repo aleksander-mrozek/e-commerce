@@ -16,15 +16,6 @@ export const Header = () => {
             Main
           </a>
         </Link>
-        <Link href="/about">
-          <a
-            className={
-              mr + (router.pathname === "/about" ? "text-indigo-300" : "")
-            }
-          >
-            About
-          </a>
-        </Link>
         <Link href="/products">
           <a
             className={

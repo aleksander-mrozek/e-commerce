@@ -6,6 +6,5 @@ const productsForPageQuery = (page: number) =>
 
 export const useProductsForPage = (page: number) => {
   const result = useQuery(...productsForPageQuery(page));
-
   return result;
 };

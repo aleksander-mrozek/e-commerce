@@ -10,3 +10,19 @@ export const getProductsForPage = async (page: number) => {
   const data: StoreApiResponse[] = await res.json();
   return data;
 };
+
+export const countProducts = async (count = 0): Promise<number> => {
+  const PRODUCTS_PER_FETCH = 501;
+  const res = await fetch(
+    `https://naszsklep-api.vercel.app/api/products?take=${PRODUCTS_PER_FETCH}&offset=${count}`
+  );
+  const data = (await res.json()) as StoreApiResponse[];
+  const newCount = count + data.length;
+  if (data.length === PRODUCTS_PER_FETCH) {
+    return countProducts(newCount);
+  } else {
+    return newCount;
+  }
+};
+
+export const NUMBER_OF_PRODUCTS = await countProducts();

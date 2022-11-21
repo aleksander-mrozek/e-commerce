@@ -7,7 +7,8 @@ interface ProductsCSRProps {
 
 export const ProductsCSRList = ({ page }: ProductsCSRProps) => {
   const result = useProductsForPage(page);
-  const products = result.data!;
+  const products = result.data;
+
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {products?.map((product) => {
