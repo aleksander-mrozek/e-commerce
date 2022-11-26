@@ -1,4 +1,5 @@
 import { Main } from "../components/Main";
+import { NewsletterForm } from "../components/NewsletterForm";
 import { useCreateProductReviewMutation } from "../generated/graphql";
 
 const Home = () => {
@@ -20,12 +21,15 @@ const Home = () => {
 
   return (
     <Main>
-      <button onClick={addReview} type="button">
-        Add review
-      </button>
-      {loading && <div className="text-red-500">Loading...</div>}
-      {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+      <NewsletterForm />
+      <div>
+        <button onClick={addReview} type="button">
+          Add review
+        </button>
+        {loading && <div className="text-red-500">Loading...</div>}
+        {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
+        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+      </div>
     </Main>
   );
 };

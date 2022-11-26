@@ -22,15 +22,12 @@ const checkoutFormSchema = yup
 type CheckoutFormData = yup.InferType<typeof checkoutFormSchema>;
 
 export const CheckoutForm = () => {
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CheckoutFormData>({
+  const { register, handleSubmit } = useForm<CheckoutFormData>({
     resolver: yupResolver(checkoutFormSchema),
   });
+
   const onSubmit = handleSubmit((data) => console.log(data));
+
   return (
     <section>
       <h1 className="sr-only">Checkout</h1>

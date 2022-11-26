@@ -5,9 +5,5 @@ interface MainProps {
 }
 
 export const Main = ({ children }: MainProps) => {
-  return (
-    <main className="bg-teal-100 flex-grow mx-auto w-full grid p-6 gap-6 sm:grid-cols-2">
-      {children}
-    </main>
-  );
+  return <main className="bg-teal-100 w-full">{children}</main>;
 };
