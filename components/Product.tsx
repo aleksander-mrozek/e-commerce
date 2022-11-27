@@ -6,9 +6,11 @@ import { Rating } from "./Rating";
 import { WebsiteReactMarkdown } from "./WebsiteReactMarkdown";
 import { MarkdownResult } from "../types";
 import { useCartState } from "./Cart/CartContext";
+import { ProductReviewContainer } from "./ProductReview/ProductReviewContainer";
 
 interface ProductDetails {
   id: string;
+  slug: string;
   title: string;
   description: string;
   thumbnailUrl: string;
@@ -58,6 +60,7 @@ export const ProductDetails = ({ data }: ProductProps) => {
         <WebsiteReactMarkdown>{data.longDescription}</WebsiteReactMarkdown>
       </article>
       <Rating rating={data.rating} />
+      <ProductReviewContainer productSlug={data.slug} />
     </>
   );
 };
