@@ -1,3 +1,4 @@
+import { ProductReviewForm } from "./ProductReviewForm";
 import { ProductReviewList } from "./ProductReviewList";
 
 interface ProductReviewContainerProps {
@@ -9,6 +10,7 @@ export const ProductReviewContainer = ({
 }: ProductReviewContainerProps) => {
   return (
     <div>
+      <ProductReviewForm productSlug={productSlug} />
       <ProductReviewList productSlug={productSlug} />
     </div>
   );

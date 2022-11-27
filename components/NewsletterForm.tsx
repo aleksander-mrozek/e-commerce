@@ -21,10 +21,10 @@ const newsletterFormSchema = yup
   })
   .required();
 
-type CheckoutFormData = yup.InferType<typeof newsletterFormSchema>;
+type NewsletterFormData = yup.InferType<typeof newsletterFormSchema>;
 
 export const NewsletterForm = () => {
-  const { register, handleSubmit } = useForm<CheckoutFormData>({
+  const { register, handleSubmit } = useForm<NewsletterFormData>({
     resolver: yupResolver(newsletterFormSchema),
   });
 
