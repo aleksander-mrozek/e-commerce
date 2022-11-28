@@ -6,7 +6,7 @@ interface ProductReviewListProps {
 }
 
 export const ProductReviewList = ({ productSlug }: ProductReviewListProps) => {
-  const { data, loading, error } = useGetReviewsForProductSlugQuery({
+  const { data, loading, error, client } = useGetReviewsForProductSlugQuery({
     variables: {
       slug: productSlug,
     },
@@ -18,8 +18,8 @@ export const ProductReviewList = ({ productSlug }: ProductReviewListProps) => {
 
   return (
     <ul>
-      {data.product.reviews.map((review) => (
-        <ProductReviewListItem key={review.id} review={review} />
+      {data.product.reviews.map((review, i) => (
+        <ProductReviewListItem key={review.id} index={i + 1} review={review} />
       ))}
     </ul>
   );
