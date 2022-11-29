@@ -11,7 +11,7 @@ const Home = () => {
       variables: {
         review: {
           headline: "789 bad product",
-          name: "Aleksander M",
+          name: "Alex",
           email: "example123@gmail.com",
           content: "This is the most disgusting thing I ever bought...",
           rating: 1,
