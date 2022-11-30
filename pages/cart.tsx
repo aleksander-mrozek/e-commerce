@@ -24,14 +24,8 @@ const CartContent = () => {
       body: JSON.stringify(
         cartState.items.map((cartItem) => {
           return {
-            price_data: {
-              currency: "PLN",
-              unit_amount: Math.round(cartItem.price * 100),
-              product_data: {
-                name: cartItem.title,
-              },
-            },
-            quantity: cartItem.count,
+            slug: cartItem.id,
+            count: cartItem.count,
           };
         })
       ),
