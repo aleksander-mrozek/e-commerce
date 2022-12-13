@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 import { CartBar } from "./Cart/CartBar";
 
 export const Header = () => {
+  const session = useSession();
   const router = useRouter();
   const mr = "mr-4 ";
   return (
@@ -36,7 +38,14 @@ export const Header = () => {
           </a>
         </Link>
       </nav>
-      <CartBar />
+      <div className="text-white">
+        <CartBar />
+        {session.status === "authenticated" ? (
+          <button onClick={() => signOut()}>Log out</button>
+        ) : (
+          <button onClick={() => signIn()}>Log in</button>
+        )}
+      </div>
     </header>
   );
 };

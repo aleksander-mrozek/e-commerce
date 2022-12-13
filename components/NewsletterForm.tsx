@@ -50,6 +50,7 @@ export const NewsletterForm = () => {
           <div className="relative">
             <input
               type="email"
+              id="email"
               className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
               placeholder="Enter email"
               required
