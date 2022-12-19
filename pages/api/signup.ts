@@ -1,11 +1,29 @@
 import { NextApiHandler } from "next";
+import * as bcrypt from "bcrypt";
+import { authorizedApolloClient } from "../../GraphQL/apolloClient";
+import {
+  CreateAccountMutation,
+  CreateAccountMutationVariables,
+  CreateAccountDocument,
+} from "../../generated/graphql";
 
-const SignUpHandler: NextApiHandler = (req, res) => {
+const SignUpHandler: NextApiHandler = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log({ email, password });
+  const passwordHash = await bcrypt.hash(password, 12);
 
-  res.json({});
+  const user = await authorizedApolloClient.mutate<
+    CreateAccountMutation,
+    CreateAccountMutationVariables
+  >({
+    mutation: CreateAccountDocument,
+    variables: {
+      email,
+      password: passwordHash,
+    },
+  });
+
+  res.json({ userId: user.data?.createAccount?.id });
 };
 
 export default SignUpHandler;
