@@ -28,7 +28,7 @@ export const NewsletterForm = () => {
     resolver: yupResolver(newsletterFormSchema),
   });
 
-  const { mutate } = useAddToNewsletterMutation();
+  const { mutate, status } = useAddToNewsletterMutation();
 
   const onSubmit = handleSubmit((data) => mutate(data));
 
@@ -49,6 +49,7 @@ export const NewsletterForm = () => {
 
           <div className="relative">
             <input
+              data-testid="email-newsletter-input"
               type="email"
               id="email"
               className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
@@ -77,12 +78,14 @@ export const NewsletterForm = () => {
         </div>
 
         <button
+          data-testid="email-newsletter-submit"
           type="submit"
           className="ml-3 inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
         >
           Sign in
         </button>
       </form>
+      {status === "success" && "success"}
     </div>
   );
 };
