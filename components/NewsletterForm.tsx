@@ -23,14 +23,20 @@ const newsletterFormSchema = yup
 
 type NewsletterFormData = yup.InferType<typeof newsletterFormSchema>;
 
-export const NewsletterForm = () => {
+interface NewsletterFormViewProps {
+  status: "error" | "idle" | "loading" | "success";
+  onSubmit: (formData: NewsletterFormData) => void;
+}
+
+export const NewsletterFormView = ({
+  onSubmit,
+  status,
+}: NewsletterFormViewProps) => {
   const { register, handleSubmit } = useForm<NewsletterFormData>({
     resolver: yupResolver(newsletterFormSchema),
   });
 
-  const { mutate, status } = useAddToNewsletterMutation();
-
-  const onSubmit = handleSubmit((data) => mutate(data));
+  const doSubmit = handleSubmit((data) => onSubmit(data));
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -40,7 +46,7 @@ export const NewsletterForm = () => {
 
       <form
         className="mx-auto mt-8 mb-0 max-w-md space-y-4"
-        onSubmit={onSubmit}
+        onSubmit={doSubmit}
       >
         <div>
           <label htmlFor="email" className="sr-only">
@@ -49,6 +55,7 @@ export const NewsletterForm = () => {
 
           <div className="relative">
             <input
+              aria-label="emailNewsletter"
               data-testid="email-newsletter-input"
               type="email"
               id="email"
@@ -82,10 +89,15 @@ export const NewsletterForm = () => {
           type="submit"
           className="ml-3 inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
         >
-          Sign in
+          Try and submit!
         </button>
       </form>
-      {status === "success" && "success"}
+      <p>{status === "success" && "submitted successfully"}</p>
     </div>
   );
+};
+
+export const NewsletterForm = () => {
+  const { mutate, status } = useAddToNewsletterMutation();
+  return <NewsletterFormView onSubmit={mutate} status={status} />;
 };

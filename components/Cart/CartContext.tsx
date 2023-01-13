@@ -7,19 +7,8 @@ import {
 } from "react";
 
 import { getCartItemsFromStorage, setCartItemsInStorage } from "./CartStorage";
-
-export interface CartItem {
-  readonly id: string;
-  readonly price: number;
-  readonly title: string;
-  readonly count: number;
-}
-
-interface CartState {
-  readonly items: readonly CartItem[];
-  readonly addItemToCart: (item: CartItem) => void;
-  readonly removeItemFromCart: (id: CartItem["id"]) => void;
-}
+import type { CartItem, CartState } from "./cartTypes";
+import { withNewCartItem } from "./cartUtils";
 
 export const CartStateContext = createContext<CartState | null>(null);
 
@@ -46,22 +35,7 @@ export const CartStateContextProvider = ({
       value={{
         items: cartItems || [],
         addItemToCart: (item) => {
-          setCartItems((prevState = []) => {
-            const existingItem = prevState.find((el) => el.id === item.id);
-            if (!existingItem) {
-              return [...prevState, item];
-            }
-
-            return prevState.map((el) => {
-              if (el.id === item.id) {
-                return {
-                  ...el,
-                  count: el.count + 1,
-                };
-              }
-              return el;
-            });
-          });
+          setCartItems((prevState = []) => withNewCartItem(prevState, item));
         },
         removeItemFromCart: (id) => {
           setCartItems((prevState = []) => {
