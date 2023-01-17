@@ -11,6 +11,14 @@ export const getProductsForPage = async (page: number) => {
   return data;
 };
 
+{
+  /*
+
+// count total number of products for pagination purpose
+
+// !!! NOT TO BE EXECUTED FOR CSR DUE TO SERVER LOAD
+// TO BE USED ONLY FOR SSG TO RUN API REQUEST AND COUNT PRODUCTS ONLY ONCE DURING BUILD
+
 export const countProducts = async (count = 0): Promise<number> => {
   const PRODUCTS_PER_FETCH = 501;
   const res = await fetch(
@@ -26,3 +34,6 @@ export const countProducts = async (count = 0): Promise<number> => {
 };
 
 export const NUMBER_OF_PRODUCTS = await countProducts();
+
+  */
+}

@@ -1,13 +1,15 @@
 import Link from "next/link";
 
-import { NUMBER_OF_PRODUCTS, PRODUCTS_PER_PAGE } from "../../APIs/getProducts";
-import { PaginationLayout } from "../Pagination/PaginationLayout";
+// import { NUMBER_OF_PRODUCTS, PRODUCTS_PER_PAGE } from "../../APIs/getProducts";
+// import { PaginationLayout } from "../Pagination/PaginationLayout";
+
 import { useCSRPagination } from "./useCSRPagination";
 
 export const ProductsCSRPagination = () => {
   const { page, getPageHref } = useCSRPagination();
 
-  const NUMBER_OF_PAGES = Math.ceil(NUMBER_OF_PRODUCTS / PRODUCTS_PER_PAGE);
+  // const NUMBER_OF_PAGES = Math.ceil(NUMBER_OF_PRODUCTS / PRODUCTS_PER_PAGE);
+
   const prevPage = page - 1;
   const nextPage = page + 1;
   const prevPageHref = page > 1 ? getPageHref(prevPage) : getPageHref(1);
@@ -25,6 +27,10 @@ export const ProductsCSRPagination = () => {
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
+          {/*
+
+          // display range of items currently displayed and total number of products
+
           <p className="text-sm text-gray-700">
             Showing{" "}
             {page === 1
@@ -36,6 +42,8 @@ export const ProductsCSRPagination = () => {
               : (PRODUCTS_PER_PAGE * page).toString()}{" "}
             of {NUMBER_OF_PRODUCTS.toString()} results
           </p>
+
+          */}
         </div>
         <div>
           <nav
@@ -60,7 +68,13 @@ export const ProductsCSRPagination = () => {
                 </svg>
               </a>
             </Link>
+            {/*
+
+            // place PaginationLayout component to show user friendly navigation for product list display
+
             <PaginationLayout numPages={NUMBER_OF_PAGES} />
+
+            */}
             <Link href={nextPageHref}>
               <a className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
                 <span className="sr-only">Next</span>
